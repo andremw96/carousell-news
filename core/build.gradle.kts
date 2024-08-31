@@ -18,12 +18,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            isJniDebuggable = true
+            buildConfigField("String", "BASE_URL", "\"https://storage.googleapis.com/\"")
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://storage.googleapis.com/\"")
         }
     }
     compileOptions {
@@ -32,6 +38,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 }
 
@@ -45,5 +55,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.bundles.retrofit)
-    implementation(libs.bundles.daggerHilt)
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.kapt)
 }

@@ -48,5 +48,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 
 [bundles]
 retrofit = [ "retrofit", "retrofit-gson", "okhttp-logging" ]
-daggerHilt = [ "dagger-hilt", "dagger-hilt-kapt" ]
 

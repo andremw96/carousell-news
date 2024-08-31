@@ -69,5 +69,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation(libs.bundles.daggerHilt)
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.kapt)
 }
