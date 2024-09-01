@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -71,4 +72,6 @@ dependencies {
 
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.kapt)
+
+    implementation(libs.coil)
 }
