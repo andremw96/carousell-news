@@ -2,6 +2,7 @@ package com.andremw96.carousell_news.ui.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.andremw96.carousell_news.mapper.CarousellNewsSchemaToState
 import com.andremw96.core.data.Resource
 import com.andremw96.core.di.IoDispatcher
 import com.andremw96.core.domain.usecase.GetCarousellNews
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class CarousellNewsListViewModel @Inject constructor(
     @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher,
     private val getCarousellNews: GetCarousellNews,
+    private val carousellNewsSchemaToState: CarousellNewsSchemaToState,
 ) : ViewModel(), CarousellNewsListCallbacks {
     private val _viewState: MutableStateFlow<CarousellNewsListViewState> = MutableStateFlow(
         CarousellNewsListViewState.initialState()
@@ -45,7 +47,7 @@ class CarousellNewsListViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         _viewState.value = _viewState.value.copy(
-                            carousellNews = it.data ?: emptyList(),
+                            carousellNews = carousellNewsSchemaToState(it.data ?: emptyList()),
                             isLoading = false,
                             errorMessage = null,
                         )

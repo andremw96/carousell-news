@@ -1,9 +1,9 @@
 package com.andremw96.carousell_news.ui.screen
 
-import com.andremw96.core.domain.schema.CarousellNews
+import com.andremw96.carousell_news.ui.screen.model.CarousellNewsState
 
 data class CarousellNewsListViewState(
-    val carousellNews: List<CarousellNews>,
+    val carousellNews: List<CarousellNewsState>,
     val isLoading: Boolean,
     val errorMessage: String?,
 ) {

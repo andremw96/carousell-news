@@ -29,8 +29,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.andremw96.carousell_news.R
+import com.andremw96.carousell_news.ui.screen.model.CarousellNewsState
 import com.andremw96.carousell_news.ui.widget.CarouselNewsAppBar
-import com.andremw96.core.domain.schema.CarousellNews
 
 
 @Composable
@@ -88,7 +88,7 @@ fun CarousellNewsListScreen(
 
 @Composable
 fun CarousellNewsItem(
-    carousellNews: CarousellNews,
+    carousellNews: CarousellNewsState,
 ) {
     Card(
         modifier = Modifier
@@ -137,7 +137,7 @@ fun CarousellNewsItem(
         )
 
         Text(
-            text = carousellNews.timeCreated.toString(),
+            text = carousellNews.timeCreated,
             style = TextStyle(
                 color = Color.Gray,
                 fontSize = 10.sp,
