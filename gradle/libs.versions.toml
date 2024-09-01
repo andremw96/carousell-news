@@ -17,6 +17,11 @@ okhttpLoggingVersion = "4.11.0"
 daggerHiltVersion = "2.47"
 coilVersion = "2.4.0"
 
+mockitoCore = "5.12.0"
+mockitoKotlin = "5.4.0"
+kotlinxCoroutine = "1.8.0"
+lifecycleKtx = "2.8.4"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -37,12 +42,17 @@ material = { group = "com.google.android.material", name = "material", version.r
 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
-okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLoggingVersion"}
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLoggingVersion" }
 
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHiltVersion" }
 dagger-hilt-kapt = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHiltVersion" }
 
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion" }
+
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutine" }
+lifecycleTestRuntime = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "lifecycleKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -50,5 +60,6 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 android-library = { id = "com.android.library", version.ref = "agp" }
 
 [bundles]
-retrofit = [ "retrofit", "retrofit-gson", "okhttp-logging" ]
+retrofit = ["retrofit", "retrofit-gson", "okhttp-logging"]
+mockito = ["mockito-core", "mockito-kotlin", "kotlinx-coroutines-test", "lifecycleTestRuntime" ]
 

@@ -61,13 +61,6 @@ fun CarousellNewsListScreen(
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
 
-                val textSortBy = if (viewState.sortedBy == SortBy.Recent) "Sorted By: Recent" else "Sorted By: Popular"
-
-                Text(
-                    text = textSortBy,
-                    modifier = Modifier.padding(8.dp)
-                )
-
                 when {
                     viewState.isLoading -> {
                         Box(
@@ -92,6 +85,13 @@ fun CarousellNewsListScreen(
                     }
 
                     else -> {
+                        val textSortBy = if (viewState.sortedBy == SortBy.Recent) "Sorted By: Recent" else "Sorted By: Popular"
+
+                        Text(
+                            text = textSortBy,
+                            modifier = Modifier.padding(8.dp)
+                        )
+
                         LazyColumn {
                             items(viewState.carousellNews) {
                                 CarousellNewsItem(
