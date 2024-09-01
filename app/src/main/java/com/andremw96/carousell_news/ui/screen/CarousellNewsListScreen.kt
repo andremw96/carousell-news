@@ -1,5 +1,6 @@
 package com.andremw96.carousell_news.ui.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,16 +22,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.andremw96.carousell_news.R
 import com.andremw96.carousell_news.ui.screen.model.CarousellNewsState
 import com.andremw96.carousell_news.ui.widget.CarouselNewsAppBar
+import com.andremw96.carousell_news.ui.widget.CarousellNewsEmptyPage
+import com.andremw96.carousell_news.ui.widget.CarousellNewsErrorPage
 
 
 @Composable
@@ -41,7 +42,8 @@ fun CarousellNewsListScreen(
     Scaffold(
         topBar = {
             CarouselNewsAppBar(
-                title = stringResource(id = R.string.app_name),
+                title = "Carousell News",
+                modifier = Modifier.background(Color.Red)
             )
         },
         content = { paddingValues ->
@@ -64,11 +66,15 @@ fun CarousellNewsListScreen(
                     }
 
                     viewState.errorMessage != null -> {
-
+                        CarousellNewsErrorPage(viewState.errorMessage) {
+                            callbacks.loadCarousellNews()
+                        }
                     }
 
                     viewState.carousellNews.isEmpty() -> {
-
+                        CarousellNewsEmptyPage {
+                            callbacks.loadCarousellNews()
+                        }
                     }
 
                     else -> {
