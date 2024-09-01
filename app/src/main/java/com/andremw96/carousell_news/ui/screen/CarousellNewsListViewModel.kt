@@ -3,6 +3,7 @@ package com.andremw96.carousell_news.ui.screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andremw96.carousell_news.mapper.CarousellNewsSchemaToState
+import com.andremw96.carousell_news.ui.screen.model.CarousellNewsState
 import com.andremw96.core.data.Resource
 import com.andremw96.core.di.IoDispatcher
 import com.andremw96.core.domain.usecase.GetCarousellNews
@@ -46,8 +47,11 @@ class CarousellNewsListViewModel @Inject constructor(
                     }
 
                     is Resource.Success -> {
+                        val sortedData = it.data?.sortedByDescending { item ->
+                            item.timeCreated
+                        }
                         _viewState.value = _viewState.value.copy(
-                            carousellNews = carousellNewsSchemaToState(it.data ?: emptyList()),
+                            carousellNews = carousellNewsSchemaToState(sortedData ?: emptyList()),
                             isLoading = false,
                             errorMessage = null,
                         )
@@ -55,5 +59,28 @@ class CarousellNewsListViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    override fun sortNewsBy(sortBy: SortBy) {
+        val sortedData: List<CarousellNewsState> = when(sortBy) {
+            SortBy.Recent -> {
+                viewState.value.carousellNews.sortedByDescending { item ->
+                    item.timeCreated
+                }
+            }
+
+            SortBy.Popular -> {
+                viewState.value.carousellNews.sortedBy { item ->
+                    item.rank
+                }
+            }
+        }
+
+        _viewState.value = _viewState.value.copy(
+            carousellNews = sortedData,
+            isLoading = false,
+            errorMessage = null,
+            sortedBy = sortBy,
+        )
     }
 }

@@ -12,7 +12,8 @@ class CarousellNewsSchemaToStateImpl : CarousellNewsSchemaToState {
                 description = it.description,
                 id = it.id,
                 rank = it.rank,
-                timeCreated = calculateTimeCreated(it.timeCreated),
+                timeCreatedString = calculateTimeCreated(it.timeCreated),
+                timeCreated = it.timeCreated,
                 title = it.title
             )
         }

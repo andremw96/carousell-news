@@ -5,6 +5,7 @@ data class CarousellNewsState(
     val description: String,
     val id: String,
     val rank: Int,
-    val timeCreated: String,
+    val timeCreated: Int,
+    val timeCreatedString: String,
     val title: String
 )

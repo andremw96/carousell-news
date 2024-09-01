@@ -6,13 +6,15 @@ data class CarousellNewsListViewState(
     val carousellNews: List<CarousellNewsState>,
     val isLoading: Boolean,
     val errorMessage: String?,
+    val sortedBy: SortBy,
 ) {
     companion object {
         fun initialState(): CarousellNewsListViewState =
             CarousellNewsListViewState(
                 carousellNews = emptyList(),
                 isLoading = false,
-                errorMessage = null
+                errorMessage = null,
+                sortedBy = SortBy.Recent,
             )
     }
 }

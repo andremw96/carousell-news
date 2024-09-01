@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -43,7 +44,13 @@ fun CarousellNewsListScreen(
         topBar = {
             CarouselNewsAppBar(
                 title = "Carousell News",
-                modifier = Modifier.background(Color.Red)
+                modifier = Modifier.background(Color.Red),
+                onRecentClick = {
+                    callbacks.sortNewsBy(SortBy.Recent)
+                },
+                onPopularClick = {
+                    callbacks.sortNewsBy(SortBy.Popular)
+                },
             )
         },
         content = { paddingValues ->
@@ -53,6 +60,13 @@ fun CarousellNewsListScreen(
                     .padding(paddingValues),
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
+
+                val textSortBy = if (viewState.sortedBy == SortBy.Recent) "Sorted By: Recent" else "Sorted By: Popular"
+
+                Text(
+                    text = textSortBy,
+                    modifier = Modifier.padding(8.dp)
+                )
 
                 when {
                     viewState.isLoading -> {
@@ -116,43 +130,43 @@ fun CarousellNewsItem(
         Text(
             text = carousellNews.title,
             style = TextStyle(
-                color = Color.Black,
+                color = Color(0xFF262629),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
             ),
             maxLines = 2,
             modifier = Modifier.padding(
-                top = 8.dp,
-                start = 8.dp,
-                end = 8.dp,
+                top = 12.dp,
+                start = 16.dp,
+                end = 16.dp,
             )
         )
 
         Text(
             text = carousellNews.description,
+            overflow = TextOverflow.Ellipsis,
             style = TextStyle(
-                color = Color.DarkGray,
-                fontSize = 12.sp,
+                color = Color(0xFF262629),
+                fontSize = 14.sp,
             ),
             maxLines = 2,
             modifier = Modifier.padding(
-                top = 8.dp,
-                start = 8.dp,
-                end = 8.dp,
+                top = 4.dp,
+                start = 16.dp,
+                end = 16.dp,
             )
         )
 
         Text(
-            text = carousellNews.timeCreated,
+            text = carousellNews.timeCreatedString,
             style = TextStyle(
-                color = Color.Gray,
-                fontSize = 10.sp,
+                color = Color(0xFF8F939C),
+                fontSize = 12.sp,
             ),
             modifier = Modifier.padding(
                 top = 8.dp,
-                start = 8.dp,
-                end = 8.dp,
-                bottom = 8.dp
+                start = 16.dp,
+                bottom = 12.dp
             )
         )
     }
